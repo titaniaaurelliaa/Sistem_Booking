@@ -11,8 +11,8 @@ public class PemesananTiketKereta {
             {36000, 46000},//sby
             {200000, 300000}//jkt
         };
-        int a, pilihan, jumlah, jml = 0;
-        double bayar, totalharga, kembalian;
+        int a, pilihan, jumlah, jml = 0, tanggal, bulan, tahun;
+        double bayar, totalharga, kembalian, waktuBerangkat;
         char jawab;
         int[] passWord= {2341, 2342};
         String[][] userName= {{"Titan"}, {"Dini"}};
@@ -44,7 +44,7 @@ public class PemesananTiketKereta {
 
 
         //memilih tujuan
-        System.out.println(" ==========================================");
+        System.out.println("\n ==========================================");
         System.out.println("| --- Selamat Datang di Stasiun Malang --- |");
         System.out.println(" ==========================================");
 
@@ -56,12 +56,10 @@ public class PemesananTiketKereta {
         System.out.println(" ==========================================");
         System.out.print("Pilihan anda: ");
         pilihan = input.nextInt();
-
-
         int kotaTujuan = pilihan - 1;
 
         //memilih gerbong
-        System.out.println(" \n ==========================================");
+        System.out.println(" \n==========================================");
         System.out.println("|     Silahkan memilih gerbong kereta      |");
         System.out.println("|                   ---                    |");
         System.out.println("|           1. Gerbong Ekonomi             |");
@@ -73,14 +71,23 @@ public class PemesananTiketKereta {
         System.out.println("\n==========================================");
         System.out.println("|         --- Data Pengguna ---           |");
         System.out.println("==========================================");
-        
+
+        System.out.print("Masukkan tanggal keberangkatan: ");
+        tanggal = input.nextInt();
+        System.out.print("Masukkan bulan keberangkatan: ");
+        bulan = input.nextInt();
+        System.out.print("Masukkan tahun keberangkatan: ");
+        tahun = input.nextInt();
+        System.out.print("\nMasukkan waktu keberangkatan: ");
+        waktuBerangkat = input.nextDouble();  
+
         //perulangan dan input kursi
         do {
-            System.out.print("\nMasukkan nama: ");
+            System.out.print("\nMasukkan nama       : ");
             nama = input.next();
-            System.out.print("Masukkan baris: ");
+            System.out.print("Masukkan baris kursi: ");
             baris = input.nextInt();
-            System.out.print("Masukkan kolom: ");
+            System.out.print("Masukkan kolom kursi: ");
             kolom = input.nextInt();
  
             // Cek apakah kursi sudah terisi
@@ -96,11 +103,14 @@ public class PemesananTiketKereta {
             jawab = input.next().charAt(0);
         } while (jawab == 'y' || jawab == 'Y');
  
+        System.out.println("\n==========================================");
+        System.out.println("|          --- Pembayaran ---            |");
+        System.out.println("==========================================");
         System.out.println("Total Pelanggan adalah : " + jml);
  
         int hargaTiket = nominalHarga[kotaTujuan][gerbongKereta - 1];
 
-        //bersarang / nested if
+        //bersarang / nested if (untuk pembayaran)
         if (kotaTujuan == 1) {
             if (jml > 5) {
                 //totalharga = (harga[pilihan] * jml) - (harga[pilihan] * jml * 0.05);
@@ -113,6 +123,10 @@ public class PemesananTiketKereta {
                     System.out.println("Kembalian anda adalah = " + kembalian);
                 } else if (bayar == totalharga) {
                     System.out.println("Uang anda pas");
+                } else if (bayar < totalharga) {
+                    for(int i=0; bayar < totalharga; i++) {
+
+                    }
                 }
             }
         } else {
@@ -147,5 +161,6 @@ public class PemesananTiketKereta {
         } else {
             System.out.println("Terima kasih!");
         }
+        
     }
 }
