@@ -14,25 +14,66 @@ public class PemesananTiketKereta {
         int a, pilihan, jumlah, jml = 0;
         double bayar, totalharga, kembalian;
         char jawab;
+        int[] passWord= {2341, 2342};
+        String[][] userName= {{"Titan"}, {"Dini"}};
+        boolean login= false;
+
+        //login
+        do {
+            System.out.print("\nMasukkan username: ");
+            String namaPengguna = input.nextLine();
+            System.out.print("Masukkan PIN anda: ");
+            int pin = input.nextInt();
+            input.nextLine(); 
+        
+            login = false; 
+            for (int i = 0; i < userName.length; i++) {
+                if (userName[i][0].equals(namaPengguna) && passWord[i] == pin) {
+                    login = true; 
+                    break;
+                }
+            }
+        
+            if (login) {
+                System.out.println("Login berhasil");
+            } else {
+                System.out.println("\nUsername dan PIN Salah!");
+            }
+        } while (!login);
+        
+
 
         //memilih tujuan
-        System.out.println("Selamat Datang di Stasiun Malang");
-        System.out.println("Kemana Tujuan Anda?");
-        System.out.println("\nSilahkan Memilih Tujuan Anda?");
-        System.out.println("1. Surabaya, KA Jayabaya");
-        System.out.println("2. Jakarta, KA Brawijaya");
+        System.out.println(" ==========================================");
+        System.out.println("| --- Selamat Datang di Stasiun Malang --- |");
+        System.out.println(" ==========================================");
+
+        System.out.println("\n ==========================================");
+        System.out.println("|      Silahkan Memilih Tujuan Anda        |");
+        System.out.println("|                  ---                     |");
+        System.out.println("|         1. Surabaya, KA Jayabaya         |");
+        System.out.println("|         2. Jakarta, KA Brawijaya         |");
+        System.out.println(" ==========================================");
         System.out.print("Pilihan anda: ");
         pilihan = input.nextInt();
+
 
         int kotaTujuan = pilihan - 1;
 
         //memilih gerbong
-        System.out.println("\nSilahkan memilih gerbong kereta: ");
-        System.out.println("1. Gerbong Ekonomi");
-        System.out.println("2. Gerbong Eksekutif");
+        System.out.println(" \n ==========================================");
+        System.out.println("|     Silahkan memilih gerbong kereta      |");
+        System.out.println("|                   ---                    |");
+        System.out.println("|           1. Gerbong Ekonomi             |");
+        System.out.println("|          2. Gerbong Eksekutif            |");
+        System.out.println(" ==========================================");
         System.out.print("Pilihan anda: ");
         int gerbongKereta = input.nextInt();
- 
+
+        System.out.println("\n==========================================");
+        System.out.println("|         --- Data Pengguna ---           |");
+        System.out.println("==========================================");
+        
         //perulangan dan input kursi
         do {
             System.out.print("\nMasukkan nama: ");
