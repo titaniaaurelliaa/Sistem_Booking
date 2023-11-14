@@ -78,7 +78,7 @@ public class PemesananTiketKereta {
         bulan = input.nextInt();
         System.out.print("Masukkan tahun keberangkatan: ");
         tahun = input.nextInt();
-        System.out.print("\nMasukkan waktu keberangkatan: ");
+        System.out.print("Masukkan waktu keberangkatan: ");
         waktuBerangkat = input.nextDouble();  
 
         //perulangan dan input kursi
@@ -143,24 +143,36 @@ public class PemesananTiketKereta {
         }
 
         //menu
-        System.out.println("\nMenu:");
-        System.out.println("1. Tampilkan data pelanggan beserta kursi yang dipilih");
+        System.out.println("\n==========================================");
+        System.out.println("Menu:");
+        System.out.println("1. Cetak Struk Pembelian Tiket");
         System.out.println("2. Keluar");
         System.out.print("Pilihan anda: ");
         int menu = input.nextInt();
+        System.out.println("==========================================");
  
         if (menu == 1) {
-            System.out.println("\nData pelanggan beserta kursi yang dipilih:");
+            System.out.println("\n==========================================");
+            System.out.println(" --- Struk Pembelian Tiket --- ");
             for (int i = 0; i < penumpang.length; i++) {
                 for (int j = 0; j < penumpang[i].length; j++) {
                     if (penumpang[i][j] != null) {
-                        System.out.println("Nama: " + penumpang[i][j] + ", Kursi: " + (i+1) + "-" + (j+1));
+                        System.out.println("\nNama: " + penumpang[i][j] + ", Kursi: " + (i+1) + "-" + (j+1));
+                        if (kotaTujuan == 0) {
+                            System.out.println("Kota Tujuan: Surabaya");
+                        } else if (kotaTujuan == 1) {
+                            System.out.println("Kota Tujuan: Jakarta");
+                        }
+                        System.out.println("==========================================");
                     }
+                    
                 }
             }
         } else {
             System.out.println("Terima kasih!");
         }
+        
+    
         
     }
 }
