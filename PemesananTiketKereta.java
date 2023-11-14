@@ -153,16 +153,24 @@ public class PemesananTiketKereta {
  
         if (menu == 1) {
             System.out.println("\n==========================================");
-            System.out.println(" --- Struk Pembelian Tiket --- ");
+            System.out.println("   --- Struk Pembelian Tiket --- ");
             for (int i = 0; i < penumpang.length; i++) {
                 for (int j = 0; j < penumpang[i].length; j++) {
                     if (penumpang[i][j] != null) {
                         System.out.println("\nNama: " + penumpang[i][j] + ", Kursi: " + (i+1) + "-" + (j+1));
                         if (kotaTujuan == 0) {
-                            System.out.println("Kota Tujuan: Surabaya");
+                            System.out.println("Kota Tujuan: Surabaya, KA Jayabaya");
                         } else if (kotaTujuan == 1) {
-                            System.out.println("Kota Tujuan: Jakarta");
+                            System.out.println("Kota Tujuan: Jakarta, KA Brawijaya");
                         }
+
+                        if (gerbongKereta == 1) {
+                            System.out.println("Gerbong: Ekonomi");
+                        } else if (kotaTujuan == 2) {
+                            System.out.println("Gerbong: Eksekutif");
+                        }
+                        System.out.println("Jadwal Keberangkatan: "+ tanggal+ "," + bulan + ","+ tahun);
+                        System.out.println("Waktu Keberangkatan: " + waktuBerangkat);
                         System.out.println("==========================================");
                     }
                     
