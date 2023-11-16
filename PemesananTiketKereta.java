@@ -144,10 +144,7 @@ public class PemesananTiketKereta {
                     System.out.println("Kembalian anda adalah = " + kembalian);
                 } else if (bayar == totalharga) {
                     System.out.println("Uang anda pas");
-                } else if (bayar < totalharga) {
-                    System.out.println("Uang anda kurang");
-                    
-                }
+                }   
             }
         } else {
             totalharga = hargaTiket * jml;
@@ -159,9 +156,6 @@ public class PemesananTiketKereta {
                 System.out.println("Kembalian anda adalah = " + kembalian);
             } else if (bayar == totalharga) {
                 System.out.println("Uang anda pas");
-            } else if (bayar < totalharga) {
-                System.out.println("Uang anda kurang");
-                
             }
         }
 
