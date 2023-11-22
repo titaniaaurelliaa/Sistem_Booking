@@ -1,12 +1,43 @@
 import java.util.Scanner;
 
+
 public class PemesananTiketKereta {
+    static Scanner input = new Scanner(System.in);
+    static boolean login = false;
+    static int[] passWord= {2341, 2342};
+    static String[][] userName= {{"Titan"}, {"Dini"}};
+
+    //fungsi login
+    static void login () {
+        do {
+           System.out.print("\nMasukkan username: ");
+           String namaPengguna = input.nextLine();
+           System.out.print("Masukkan PIN anda: ");
+           int pin = input.nextInt();
+           input.nextLine(); 
+       
+           login = false; 
+           for (int i = 0; i < userName.length; i++) {
+               if (userName[i][0].equals(namaPengguna) && passWord[i] == pin) {
+                   login = true; 
+                   break;
+               }
+           }
+       
+           if (login) {
+               System.out.println("Login berhasil");
+           } else {
+               System.out.println("\nUsername dan PIN Salah!");
+           }
+       } while (!login);
+   }
+
     public static void UcapanTerimakasih(){
         System.out.println("Terimakasih sudah memakai layanan kami.\n" + 
         "Semoga perjalanan anda menyenangkan dan selamat sampai tujuan.");
     }
     public static void main(String[] args) {
-        Scanner input = new Scanner(System.in);
+        
         String nama, next, tanggal;
         String[][] penumpang = new String[10][4];
         String[][] kota = {
@@ -22,33 +53,13 @@ public class PemesananTiketKereta {
         int a, pilihan, jumlah, jml = 0, jamkeberangkatan;
         double bayar, totalharga, kembalian, waktuBerangkat;
         char jawab;
-        int[] passWord= {2341, 2342};
-        String[][] userName= {{"Titan"}, {"Dini"}};
-        boolean login = false;
+        
+        
 
         
-        //login
-        do {
-            System.out.print("\nMasukkan username: ");
-            String namaPengguna = input.nextLine();
-            System.out.print("Masukkan PIN anda: ");
-            int pin = input.nextInt();
-            input.nextLine(); 
+        //memanggil fungsi login
+        login();
         
-            login = false; 
-            for (int i = 0; i < userName.length; i++) {
-                if (userName[i][0].equals(namaPengguna) && passWord[i] == pin) {
-                    login = true; 
-                    break;
-                }
-            }
-        
-            if (login) {
-                System.out.println("Login berhasil");
-            } else {
-                System.out.println("\nUsername dan PIN Salah!");
-            }
-        } while (!login);
         
         //memilih tujuan
         System.out.println("\n ==========================================");
