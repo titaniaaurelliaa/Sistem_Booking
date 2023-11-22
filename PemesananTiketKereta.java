@@ -1,10 +1,18 @@
 import java.util.Scanner;
 
 public class PemesananTiketKereta {
+    public static void UcapanTerimakasih(){
+        System.out.println("Terimakasih sudah memakai layanan kami.\n" + 
+        "Semoga perjalanan anda menyenangkan dan selamat sampai tujuan.");
+    }
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         String nama, next, tanggal;
         String[][] penumpang = new String[10][4];
+        String[][] kota = {
+            {"Surabaya", "Jakarta"},
+            {"KA jayabaya", "KA Gajayana"}
+        };
         int baris, kolom;
         int[] harga = {20000, 50000};
         int[][] nominalHarga = {
@@ -16,8 +24,9 @@ public class PemesananTiketKereta {
         char jawab;
         int[] passWord= {2341, 2342};
         String[][] userName= {{"Titan"}, {"Dini"}};
-        boolean login= false;
+        boolean login = false;
 
+        
         //login
         do {
             System.out.print("\nMasukkan username: ");
@@ -49,8 +58,8 @@ public class PemesananTiketKereta {
         System.out.println("\n ==========================================");
         System.out.println("|      Silahkan Memilih Tujuan Anda        |");
         System.out.println("|                  ---                     |");
-        System.out.println("|         1. Surabaya, KA Jayabaya         |");
-        System.out.println("|         2. Jakarta, KA Brawijaya         |");
+        System.out.println("|  1. " + kota[0][0] + ", " + kota [1][0] +           "|");   
+        System.out.println("|  2. " + kota[0][1] + ", " + kota [1][1] +           "|");         
         System.out.println(" ==========================================");
         System.out.print("Pilihan anda: ");
         pilihan = input.nextInt();
@@ -71,7 +80,7 @@ public class PemesananTiketKereta {
         System.out.println("|         --- Data Pengguna ---           |");
         System.out.println("==========================================");
 
-        System.out.print("Masukkan tanggal keberangkatan: ");
+        System.out.print("Masukkan tanggal keberangkatan (dd-mm-yyyy): ");
         tanggal = input.next(); 
         System.out.println(" \n==========================================");
         System.out.println("| Silahkan memilih jam keberangkatan kereta|");
@@ -195,7 +204,7 @@ public class PemesananTiketKereta {
                 }
             }
         } else {
-            System.out.println("Terima kasih!");
+            UcapanTerimakasih();
         }   
     }
 }
