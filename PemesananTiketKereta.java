@@ -1,67 +1,50 @@
 import java.util.Scanner;
 
-
 public class PemesananTiketKereta {
     static Scanner input = new Scanner(System.in);
     static boolean login = false;
-    static int[] passWord= {2341, 2342};
-    static String[][] userName= {{"Titan"}, {"Dini"}};
-
-    //fungsi login
-    static void login () {
-        do {
-           System.out.print("\nMasukkan username: ");
-           String namaPengguna = input.nextLine();
-           System.out.print("Masukkan PIN anda: ");
-           int pin = input.nextInt();
-           input.nextLine(); 
-       
-           login = false; 
-           for (int i = 0; i < userName.length; i++) {
-               if (userName[i][0].equals(namaPengguna) && passWord[i] == pin) {
-                   login = true; 
-                   break;
-               }
-           }
-       
-           if (login) {
-               System.out.println("Login berhasil");
-           } else {
-               System.out.println("\nUsername dan PIN Salah!");
-           }
-       } while (!login);
-   }
-
-    public static void UcapanTerimakasih(){
-        System.out.println("Terimakasih sudah memakai layanan kami.\n" + 
-        "Semoga perjalanan anda menyenangkan dan selamat sampai tujuan.");
-    }
-    public static void main(String[] args) {
-        
-        String nama, next, tanggal;
-        String[][] penumpang = new String[10][4];
-        String[][] kota = {
+    static int[] passWord = {2341, 2342};
+    static String[][] userName = {{"Titan"}, {"Dini"}};
+    static String[][] kota = {
             {"Surabaya", "Jakarta"},
             {"KA jayabaya", "KA Gajayana"}
-        };
-        int baris, kolom;
-        int[] harga = {20000, 50000};
-        int[][] nominalHarga = {
-            {36000, 46000},//sby
-            {200000, 300000}//jkt
-        };
-        int a, pilihan, jumlah, jml = 0, jamkeberangkatan;
-        double bayar, totalharga, kembalian, waktuBerangkat;
-        char jawab;
-        
-        
+    };
+    static int pilihan;
+    static int kotaTujuan;
+    static int gerbongKereta;
+    static int jamKeberangkatan;
+    static String tanggal;
+    static int jml;
+    static double totalharga;
+    static double bayar;
+    static String[][] penumpang; 
+    static int[][] nominalHarga; 
 
-        
-        //memanggil fungsi login
-        login();
-        
-        
-        //memilih tujuan
+    // Fungsi login
+    static void login() {
+        do {
+            System.out.print("\nMasukkan username: ");
+            String namaPengguna = input.nextLine();
+            System.out.print("Masukkan PIN anda: ");
+            int pin = input.nextInt();
+            input.nextLine();
+            login = false;
+            for (int i = 0; i < userName.length; i++) {
+                if (userName[i][0].equals(namaPengguna) && passWord[i] == pin) {
+                    login = true;
+                    break;
+                }
+            }
+            if (login) {
+                System.out.println("Login berhasil");
+            } else {
+                System.out.println("\nUsername dan PIN Salah!");
+            }
+        } while (!login);
+    }
+
+    // Fungsi memilih kota tujuan
+    static void memilihKotaTujuan() {
         System.out.println("\n ==========================================");
         System.out.println("| --- Selamat Datang di Stasiun Malang --- |");
         System.out.println(" ==========================================");
@@ -69,14 +52,16 @@ public class PemesananTiketKereta {
         System.out.println("\n ==========================================");
         System.out.println("|      Silahkan Memilih Tujuan Anda        |");
         System.out.println("|                  ---                     |");
-        System.out.println("|  1. " + kota[0][0] + ", " + kota [1][0] +           "|");   
-        System.out.println("|  2. " + kota[0][1] + ", " + kota [1][1] +           "|");         
+        System.out.println("|  1. " + kota[0][0] + ", " + kota[1][0] + "|");
+        System.out.println("|  2. " + kota[0][1] + ", " + kota[1][1] + "|");
         System.out.println(" ==========================================");
         System.out.print("Pilihan anda: ");
         pilihan = input.nextInt();
-        int kotaTujuan = pilihan - 1;
+        kotaTujuan = pilihan - 1;
+    }
 
-        //memilih gerbong
+    // Fungsi memilih gerbong kereta
+    static void memilihGerbong() {
         System.out.println(" \n==========================================");
         System.out.println("|     Silahkan memilih gerbong kereta      |");
         System.out.println("|                   ---                    |");
@@ -84,15 +69,17 @@ public class PemesananTiketKereta {
         System.out.println("|          2. Gerbong Eksekutif            |");
         System.out.println(" ==========================================");
         System.out.print("Pilihan anda: ");
-        int gerbongKereta = input.nextInt();
+        gerbongKereta = input.nextInt();
+    }
 
-        //memilih tanggal dan jam keberangkatan
+    // Fungsi memilih tanggal dan jam keberangkatan
+    static void memilihTanggalDanJam() {
         System.out.println("\n==========================================");
         System.out.println("|         --- Data Pengguna ---           |");
         System.out.println("==========================================");
 
         System.out.print("Masukkan tanggal keberangkatan (dd-mm-yyyy): ");
-        tanggal = input.next(); 
+        tanggal = input.next();
         System.out.println(" \n==========================================");
         System.out.println("| Silahkan memilih jam keberangkatan kereta|");
         System.out.println("|                   ---                    |");
@@ -100,122 +87,161 @@ public class PemesananTiketKereta {
         System.out.println("|              2. 14.00 WIB                |");
         System.out.println(" ===========================================");
         System.out.print("Pilihan anda: ");
-        jamkeberangkatan = input.nextInt();
+        jamKeberangkatan = input.nextInt();
+    }
 
-        // if(pilihan == 1){
-        //     System.out.println(" \n==========================================");
-        //     System.out.println("| Silahkan memilih jam keberangkatan kereta|");
-        //     System.out.println("|                   ---                    |");
-        //     System.out.println("|              1. 11.00 WIB                |");
-        //     System.out.println("|              2. 14.00 WIB                |");
-        //     System.out.println(" ===========================================");
-        //     System.out.print("Pilihan anda: ");
-        //     jamkeberangkatan = input.nextInt();
-        // } else {
-        //     System.out.println(" \n==========================================");
-        //     System.out.println("| Silahkan memilih jam keberangkatan kereta|");
-        //     System.out.println("|                   ---                    |");
-        //     System.out.println("|              1. 12.00 WIB                |");
-        //     System.out.println("|              2. 15.00 WIB                |");
-        //     System.out.println(" ===========================================");
-        //     System.out.print("Pilihan anda: ");
-        //     jamkeberangkatan = input.nextInt();
-        // } 
-
-        //perulangan dan input kursi
+    // Fungsi input kursi
+    static void inputKursi() {
+        penumpang = new String[10][4]; // inisialisasi penumpang
+        char jawab;
         do {
             System.out.print("\nMasukkan nama       : ");
-            nama = input.next();
+            String nama = input.next();
             System.out.print("Masukkan baris kursi: ");
-            baris = input.nextInt();
+            int baris = input.nextInt();
             System.out.print("Masukkan kolom kursi: ");
-            kolom = input.nextInt();
- 
-            // Cek apakah kursi sudah terisi
-            if (penumpang[baris - 1][kolom - 1] == null) {
-                penumpang[baris - 1][kolom - 1] = nama;
-                jml++;
-                System.out.println("Data penumpang berhasil di input");
+            int kolom = input.nextInt();
+
+            if (baris >= 1 && baris <= 10 && kolom >= 1 && kolom <= 4) {
+                if (penumpang[baris - 1][kolom - 1] == null) {
+                    penumpang[baris - 1][kolom - 1] = nama;
+                    jml++;
+                    System.out.println("Data penumpang berhasil di input");
+                } else {
+                    System.out.println("Kursi sudah terisi. Silakan pilih kursi lain.");
+                }
             } else {
-                System.out.println("Kursi sudah terisi. Silakan pilih kursi lain.");
+                System.out.println("Kursi tidak valid. Silakan pilih kursi antara baris 1-10 dan kolom 1-4.");
             }
- 
+
             System.out.print("Apakah anda ingin menambah pelanggan lain (Y/T)? ");
             jawab = input.next().charAt(0);
         } while (jawab == 'y' || jawab == 'Y');
- 
+    }
+
+    // Fungsi pembayaran
+    static void pembayaran() {
         System.out.println("\n==========================================");
         System.out.println("|          --- Pembayaran ---            |");
         System.out.println("==========================================");
         System.out.println("Total Pelanggan adalah : " + jml);
- 
+
+        nominalHarga = new int[][] {
+                {36000, 46000},//sby
+                {200000, 300000}//jkt
+        };
+
         int hargaTiket = nominalHarga[kotaTujuan][gerbongKereta - 1];
 
-        //bersarang / nested if (untuk pembayaran)
-        if (kotaTujuan == 1) {
-            if (jml > 5) {
-                //totalharga = (harga[pilihan] * jml) - (harga[pilihan] * jml * 0.05);
-                totalharga = (hargaTiket * jml) - (hargaTiket * jml * 0.05);
-                System.out.println("Total Harga : " + totalharga);
-                System.out.print("Masukkan nominal pembayaran anda : ");
-                bayar = input.nextDouble();
-                if (bayar > totalharga) {
-                    kembalian = bayar - totalharga;
-                    System.out.println("Kembalian anda adalah = " + kembalian);
-                } else if (bayar == totalharga) {
-                    System.out.println("Uang anda pas");
-                }   
-            }
+        if (kotaTujuan == 1 && jml > 5) {
+            totalharga = (hargaTiket * jml) - (hargaTiket * jml * 0.05);
         } else {
             totalharga = hargaTiket * jml;
-            System.out.println("Total Harga : " + totalharga);
-            System.out.print("Masukkan nominal pembayaran anda : ");
-            bayar = input.nextDouble();
-            if (bayar > totalharga) {
-                kembalian = bayar - totalharga;
-                System.out.println("Kembalian anda adalah = " + kembalian);
-            } else if (bayar == totalharga) {
-                System.out.println("Uang anda pas");
-            }
         }
 
-        //menu
+        System.out.println("Total Harga : " + totalharga);
+        System.out.print("Masukkan nominal pembayaran anda : ");
+        bayar = input.nextDouble();
+
+        if (bayar > totalharga) {
+            double kembalian = bayar - totalharga;
+            System.out.println("Kembalian anda adalah = " + kembalian);
+        } else if (bayar == totalharga) {
+            System.out.println("Uang anda pas");
+        } else {
+            System.out.println("Uang anda kurang. Pembayaran gagal.");
+        }
+    }
+
+    // Fungsi cetak struk pembelian tiket
+    static void cetakStruk() {
+        System.out.println("\n===========================================");
+        System.out.println("|      --- Struk Pembelian Tiket ---      |");
+        System.out.println("===========================================");
+        for (int i = 0; i < penumpang.length; i++) {
+            for (int j = 0; j < penumpang[i].length; j++) {
+                if (penumpang[i][j] != null) {
+                    System.out.println("Nama                  : " + penumpang[i][j] + ", Kursi: " + (i + 1) + "-" + (j + 1));
+                    if (kotaTujuan == 1) {
+                        System.out.println("Kota Tujuan           : Surabaya, KA Jayabaya");
+                    } else {
+                        System.out.println("Kota Tujuan           : Jakarta, KA Brawijaya");
+                    }
+                    if (gerbongKereta == 1) {
+                        System.out.println("Gerbong               : Gerbong Ekonomi");
+                    } else {
+                        System.out.println("Gerbong               : Gerbong Eksekutif");
+                    }
+                    System.out.println("Tanggal Keberangkatan : " + tanggal);
+                    if (jamKeberangkatan == 1) {
+                        System.out.println("Jam keberangkatan     : 11.00 WIB");
+                    } else {
+                        System.out.println("Jam Keberangkatan     : 14.00 WIB");
+                    }
+                }
+            }
+        }
+    }
+
+    // Fungsi ucapan terimakasih
+    static void ucapanTerimakasih() {
+        System.out.println("Terimakasih sudah memakai layanan kami.\n" +
+                "Semoga perjalanan anda menyenangkan dan selamat sampai tujuan.");
+    }
+
+    public static void main(String[] args) {
+        penumpang = new String[10][4]; // inisialisasi penumpang
+        nominalHarga = new int[][] {
+                {36000, 46000},//sby
+                {200000, 300000}//jkt
+        };
+
+        // multi level
+        System.out.println("Masuk sebagai: ");
+        System.out.println("1. Admin/ kasir");
+        System.out.println("2. Pengguna");
+        int level = input.nextInt();
+        input.nextLine();
+
+        // memanggil fungsi login
+        login();
+
+        // menampilkan menu
+        // System.out.println("Menu: ");
+        // System.out.println("1. Pesan tiket kereta");
+        // System.out.println("2. cek stok ");
+        // System.out.println("3. riwayat pemesanan");
+        // System.out.println("4. laporan dana"); //admin
+
+        // memilih tujuan
+        memilihKotaTujuan();
+
+        // memilih gerbong
+        memilihGerbong();
+
+        // memilih tanggal dan jam keberangkatan
+        memilihTanggalDanJam();
+
+        // input kursi
+        inputKursi();
+
+        // pembayaran
+        pembayaran();
+
+        // cetak struk
+        //cetakStruk();
+
+        // menu
         System.out.println("\nMenu:");
         System.out.println("1. Tampilkan struk pembelian tiket");
         System.out.println("2. Keluar");
         System.out.print("Pilihan anda: ");
         int menu = input.nextInt();
- 
+
         if (menu == 1) {
-            System.out.println("\n===========================================");
-            System.out.println("|      --- Struk Pembelian Tiket ---      |");
-            System.out.println("===========================================");
-            for (int i = 0; i < penumpang.length; i++) {
-                for (int j = 0; j < penumpang[i].length; j++) {
-                    if (penumpang[i][j] != null) {
-                        System.out.println("Nama                  : " + penumpang[i][j] + ", Kursi: " + (i+1) + "-" + (j+1));
-                        if (kotaTujuan == 1){
-                            System.out.println("Kota Tujuan           : Surabaya, KA Jayabaya");
-                        } else {
-                            System.out.println("Kota Tujuan           : Jakarta, KA Brawijaya");
-                        }
-                        if (gerbongKereta == 1){
-                            System.out.println("Gerbong               : Gerbong Ekonomi");
-                        } else {
-                            System.out.println("Gerbong               : Gerbong Eksekutif");
-                        }
-                        System.out.println("Tanggal Keberangkatan : " + tanggal);
-                        if (jamkeberangkatan == 1){
-                            System.out.println("Jam keberangkatan     : 11.00 WIB");
-                        } else {
-                            System.out.println("Jam Keberangkatan     : 14.00 WIB");
-                        }
-                        //System.out.println("Total Harga: " + totalharga);
-                    }
-                }
-            }
+            cetakStruk();
         } else {
-            UcapanTerimakasih();
-        }   
+            ucapanTerimakasih();
+        }
     }
 }
