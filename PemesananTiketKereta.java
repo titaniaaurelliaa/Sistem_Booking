@@ -4,7 +4,7 @@ public class PemesananTiketKereta {
     static Scanner input = new Scanner(System.in);
     static boolean login = false;
     static int[] passWord = {2341, 2342};
-    static String[][] userName = {{"Titan"}, {"Dini"}};
+    static String[] userName = {"Titan", "Dini"};
     static String[][] kota = {
             {"Surabaya", "Jakarta"},
             {"KA jayabaya", "KA Gajayana"}
@@ -30,17 +30,119 @@ public class PemesananTiketKereta {
             input.nextLine();
             login = false;
             for (int i = 0; i < userName.length; i++) {
-                if (userName[i][0].equals(namaPengguna) && passWord[i] == pin) {
+                if (userName[i].equals(namaPengguna) && passWord[i] == pin) {
                     login = true;
+                    if (userName[i].equals("Dini") && passWord[i] == 2342) {
+                        admin();
+                    }
+                    if (userName[i].equals("Titan") && passWord[i] == 2341) {
+                        pengguna();
+                    }
                     break;
                 }
             }
             if (login) {
                 System.out.println("Login berhasil");
+                admin();
             } else {
                 System.out.println("\nUsername dan PIN Salah!");
             }
         } while (!login);
+    }
+
+    //fungsi admin
+    static void admin(){
+            do{
+                //menampilkan menu
+                System.out.println("Menu: ");
+                System.out.println("1. Pesan tiket kereta");
+                System.out.println("2. Cek stok ");
+                System.out.println("3. Riwayat pemesanan");
+                System.out.println("4. Laporan dana"); //admin
+                System.out.print("Masukkan pilihan anda: ");
+                int menuAwal = input.nextInt();
+
+                if (menuAwal == 1){
+                    // memilih tujuan
+                    memilihKotaTujuan();
+
+                    // memilih gerbong
+                    memilihGerbong();
+
+                    // memilih tanggal dan jam keberangkatan
+                    memilihTanggalDanJam();
+
+                    // input kursi
+                    inputKursi();
+
+                    // pembayaran
+                    pembayaran();
+
+                    // cetak struk
+                    //cetakStruk();
+
+                    // menu
+                    System.out.println("\nMenu:");
+                    System.out.println("1. Tampilkan struk pembelian tiket");
+                    System.out.println("2. Keluar");
+                    System.out.print("Pilihan anda: ");
+                    int menu = input.nextInt();
+
+                    if (menu == 1) {
+                        cetakStruk();
+                    } else {
+                        ucapanTerimakasih();
+                    }
+                } else if (menuAwal == 2){
+                    //cek stok
+                }
+            } while (true);
+    }
+    //fungsi pengguna
+    static void pengguna(){
+            do{
+                //menampilkan menu
+                System.out.println("Menu: ");
+                System.out.println("1. Pesan tiket kereta");
+                System.out.println("2. Riwayat pemesanan");
+                System.out.print("Masukkan pilihan anda: ");
+                int menuAwal = input.nextInt();
+
+                if (menuAwal == 1){
+                    // memilih tujuan
+                    memilihKotaTujuan();
+
+                    // memilih gerbong
+                    memilihGerbong();
+
+                    // memilih tanggal dan jam keberangkatan
+                    memilihTanggalDanJam();
+
+                    // input kursi
+                    inputKursi();
+
+                    // pembayaran
+                    pembayaran();
+
+                    // cetak struk
+                    //cetakStruk();
+
+                    // menu
+                    System.out.println("\nMenu:");
+                    System.out.println("1. Tampilkan struk pembelian tiket");
+                    System.out.println("2. Keluar");
+                    System.out.print("Pilihan anda: ");
+                    int menu = input.nextInt();
+
+                    if (menu == 1) {
+                        cetakStruk();
+                    } else {
+                        ucapanTerimakasih();
+                    }
+                } else if (menuAwal == 2){
+                    //cek stok
+                }
+            } while (true);
     }
 
     // Fungsi memilih kota tujuan
@@ -198,8 +300,9 @@ public class PemesananTiketKereta {
 
         // multi level
         System.out.println("Masuk sebagai: ");
-        System.out.println("1. Admin/ kasir");
-        System.out.println("2. Pengguna");
+        System.out.println("1. Admin (Dini)");
+        System.out.println("2. Pengguna (Titan)");
+        System.out.print("Masukkan Pilihan: ");
         int level = input.nextInt();
         input.nextLine();
 
@@ -213,35 +316,35 @@ public class PemesananTiketKereta {
         // System.out.println("3. riwayat pemesanan");
         // System.out.println("4. laporan dana"); //admin
 
-        // memilih tujuan
-        memilihKotaTujuan();
+        // // memilih tujuan
+        // memilihKotaTujuan();
 
-        // memilih gerbong
-        memilihGerbong();
+        // // memilih gerbong
+        // memilihGerbong();
 
-        // memilih tanggal dan jam keberangkatan
-        memilihTanggalDanJam();
+        // // memilih tanggal dan jam keberangkatan
+        // memilihTanggalDanJam();
 
-        // input kursi
-        inputKursi();
+        // // input kursi
+        // inputKursi();
 
-        // pembayaran
-        pembayaran();
+        // // pembayaran
+        // pembayaran();
 
-        // cetak struk
-        //cetakStruk();
+        // // cetak struk
+        // //cetakStruk();
 
-        // menu
-        System.out.println("\nMenu:");
-        System.out.println("1. Tampilkan struk pembelian tiket");
-        System.out.println("2. Keluar");
-        System.out.print("Pilihan anda: ");
-        int menu = input.nextInt();
+        // // menu
+        // System.out.println("\nMenu:");
+        // System.out.println("1. Tampilkan struk pembelian tiket");
+        // System.out.println("2. Keluar");
+        // System.out.print("Pilihan anda: ");
+        // int menu = input.nextInt();
 
-        if (menu == 1) {
-            cetakStruk();
-        } else {
-            ucapanTerimakasih();
-        }
+        // if (menu == 1) {
+        //     cetakStruk();
+        // } else {
+        //     ucapanTerimakasih();
+        // }
     }
 }
