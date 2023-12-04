@@ -21,6 +21,8 @@ public class PemesananTiketKereta {
     static double bayar;
     static String[][] penumpang; 
     static int[][] nominalHarga; 
+    static String[] tanggalPemesanan = new String[100];
+    static int[] totalHargaPemesanan = new int[100];
 
     //Fungsi main
      public static void main(String[] args) {
@@ -118,6 +120,9 @@ public class PemesananTiketKereta {
                 } else if (menuAwal == 2){
                     //cek stok
                     cekKetersediaanKursi();
+                } else if (menuAwal == 4) {
+                    getDataPemesanan(tanggal, (int) totalharga);
+                    cetakLaporanDana(tanggalPemesanan, totalHargaPemesanan);
                 }
             } while (true);
     }
@@ -128,7 +133,7 @@ public class PemesananTiketKereta {
                 //menampilkan menu
                 System.out.println("Menu: ");
                 System.out.println("1. Pesan tiket kereta");
-                System.out.println("2. Cek stok ");
+                System.out.println("2. Cek stok kursi");
                 System.out.print("Masukkan pilihan anda: ");
                 int menuAwal = input.nextInt();
 
@@ -321,6 +326,29 @@ public class PemesananTiketKereta {
                 }
             }
         }
+    }
+
+    static void getDataPemesanan(String tanggal, int totalharga) {
+        for (int i = 0; i < penumpang.length; i++) {
+          for (int j = 0; j < penumpang[i].length; j++) {
+            if (penumpang[i][j] != null) {
+              tanggalPemesanan[i] = tanggal;
+              totalHargaPemesanan[i] = totalharga;
+            }
+          }
+        }
+      }
+      
+    static void cetakLaporanDana(String[] tanggalPemesanan, int[] totalHargaPemesanan) {
+    System.out.println("\n===========================================");
+    System.out.println("|      --- Laporan Dana Bulanan ---      |");
+    System.out.println("===========================================");
+    
+    for (int i = 0; i < tanggalPemesanan.length; i++) {
+        if (tanggalPemesanan[i] != null) {
+        System.out.println("Tanggal : " + tanggalPemesanan[i] + ", Total Pendapatan : " + totalHargaPemesanan[i]);
+        }
+    }
     }
 
     // Fungsi ucapan terimakasih
