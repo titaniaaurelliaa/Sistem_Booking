@@ -2,13 +2,14 @@ import java.util.Scanner;
 import java.util.Arrays;
 
 public class PemesananTiketKereta {
+    //deklarasi var global
     static Scanner input = new Scanner(System.in);
     static boolean login = false;
     static int[] passWord = {2341, 2342};
     static String[] userName = {"Titan", "Dini"};
     static String[][] kota = {
-            {"Surabaya", "Jakarta"},
-            {"KA jayabaya", "KA Gajayana"}
+    {"Surabaya", "Jakarta"},
+    {"KA jayabaya", "KA Gajayana"}
     };
     static int pilihan;
     static int kotaTujuan;
@@ -20,6 +21,26 @@ public class PemesananTiketKereta {
     static double bayar;
     static String[][] penumpang; 
     static int[][] nominalHarga; 
+
+    //Fungsi main
+     public static void main(String[] args) {
+        penumpang = new String[10][4]; // inisialisasi penumpang
+        nominalHarga = new int[][] {
+                {36000, 46000},//sby
+                {200000, 300000}//jkt
+        };
+
+        // multi level
+        System.out.println("Masuk sebagai: ");
+        System.out.println("1. Admin (Dini)");
+        System.out.println("2. Pengguna (Titan)");
+        System.out.print("Masukkan Pilihan: ");
+        int level = input.nextInt();
+        input.nextLine();
+
+        // memanggil fungsi login
+        login();
+    }
 
     // Fungsi login
     static void login() {
@@ -306,24 +327,5 @@ public class PemesananTiketKereta {
     static void ucapanTerimakasih() {
         System.out.println("Terimakasih sudah memakai layanan kami.\n" +
                 "Semoga perjalanan anda menyenangkan dan selamat sampai tujuan.");
-    }
-
-    public static void main(String[] args) {
-        penumpang = new String[10][4]; // inisialisasi penumpang
-        nominalHarga = new int[][] {
-                {36000, 46000},//sby
-                {200000, 300000}//jkt
-        };
-
-        // multi level
-        System.out.println("Masuk sebagai: ");
-        System.out.println("1. Admin (Dini)");
-        System.out.println("2. Pengguna (Titan)");
-        System.out.print("Masukkan Pilihan: ");
-        int level = input.nextInt();
-        input.nextLine();
-
-        // memanggil fungsi login
-        login();
     }
 }
