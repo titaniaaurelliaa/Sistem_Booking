@@ -78,7 +78,7 @@ public class PemesananTiketKereta {
     static void admin(){
             do{
                 //menampilkan menu
-                System.out.println("Menu: ");
+                System.out.println("\n\nMenu: ");
                 System.out.println("1. Pesan tiket kereta");
                 System.out.println("2. Cek stok ");
                 System.out.println("3. Riwayat pemesanan");
@@ -132,7 +132,7 @@ public class PemesananTiketKereta {
     static void pengguna(){
             do{
                 //menampilkan menu
-                System.out.println("Menu: ");
+                System.out.println("\n\nMenu: ");
                 System.out.println("1. Pesan tiket kereta");
                 System.out.println("2. Cek stok kursi");
                 System.out.print("Masukkan pilihan anda: ");
@@ -298,7 +298,7 @@ public class PemesananTiketKereta {
         } else {
             totalharga = hargaTiket * jml;
         }
-
+        jml = 0;
         System.out.println("Total Harga : " + totalharga);
         System.out.print("Masukkan nominal pembayaran anda : ");
         bayar = input.nextDouble();
