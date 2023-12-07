@@ -24,7 +24,7 @@ public class PemesananTiketKereta {
     static String[] tanggalPemesanan = new String[100];
     static int[] totalHargaPemesanan = new int[100];
 
-    //Fungsi main
+    //fungsi main
      public static void main(String[] args) {
         penumpang = new String[10][4]; // inisialisasi penumpang
         nominalHarga = new int[][] {
@@ -32,7 +32,7 @@ public class PemesananTiketKereta {
                 {200000, 300000}//jkt
         };
 
-        // multi level
+        //multi level
         System.out.println("Masuk sebagai: ");
         System.out.println("1. Admin (Dini)");
         System.out.println("2. Pengguna (Titan)");
@@ -40,11 +40,11 @@ public class PemesananTiketKereta {
         int level = input.nextInt();
         input.nextLine();
 
-        // memanggil fungsi login
+        //memanggil fungsi login
         login();
     }
 
-    // Fungsi login
+    //fungsi login
     static void login() {
         do {
             System.out.print("\nMasukkan username: ");
@@ -118,8 +118,9 @@ public class PemesananTiketKereta {
                         ucapanTerimakasih();
                     }
                 } else if (menuAwal == 2){
-                    //cek stok
-                    cekKetersediaanKursi();
+                    cekKetersediaanKursi(kotaTujuan, gerbongKereta);
+                } else if (menuAwal == 3){
+                    //cetakStruk();
                 } else if (menuAwal == 4) {
                     getDataPemesanan(tanggal, (int) totalharga);
                     cetakLaporanDana(tanggalPemesanan, totalHargaPemesanan);
@@ -170,12 +171,12 @@ public class PemesananTiketKereta {
                     }
                 } else if (menuAwal == 2){
                     //cek stok
-                    cekKetersediaanKursi();
+                    cekKetersediaanKursi(kotaTujuan, gerbongKereta);
                 }
             } while (true);
     }
 
-    // Fungsi memilih kota tujuan
+    //fungsi memilih kota tujuan
     static void memilihKotaTujuan() {
         System.out.println("\n ==========================================");
         System.out.println("| --- Selamat Datang di Stasiun Malang --- |");
@@ -192,7 +193,7 @@ public class PemesananTiketKereta {
         kotaTujuan = pilihan - 1;
     }
 
-    // Fungsi memilih gerbong kereta
+    //fungsi memilih gerbong kereta
     static void memilihGerbong() {
         System.out.println(" \n==========================================");
         System.out.println("|     Silahkan memilih gerbong kereta      |");
@@ -204,7 +205,7 @@ public class PemesananTiketKereta {
         gerbongKereta = input.nextInt();
     }
 
-    // Fungsi memilih tanggal dan jam keberangkatan
+    //fungsi memilih tanggal dan jam keberangkatan
     static void memilihTanggalDanJam() {
         System.out.println("\n==========================================");
         System.out.println("|         --- Data Pengguna ---           |");
@@ -222,7 +223,7 @@ public class PemesananTiketKereta {
         jamKeberangkatan = input.nextInt();
     }
 
-    // Fungsi input kursi
+    //fungsi input kursi
     static void inputKursi() {
         penumpang = new String[10][4]; // inisialisasi penumpang
         char jawab;
@@ -252,19 +253,33 @@ public class PemesananTiketKereta {
     }
 
     //fungsi cek stok
-    static void cekKetersediaanKursi() {
+    static void cekKetersediaanKursi(int tujuan, int gerbong) {
+        int sisaKursi = 0;
         for (int i = 0; i < penumpang.length; i++) {
             for (int j = 0; j < penumpang[i].length; j++) {
                 if (penumpang[i][j] == null) {
+                    sisaKursi++;
                     System.out.println("Baris " + (i + 1) + ", Kolom " + (j + 1) + ": Kosong");
                 } else {
                     System.out.println("Baris " + (i + 1) + ", Kolom " + (j + 1) + ": Terisi");
                 }
             }
         }
+        System.out.println("Jumlah sisa kursi di gerbong " + (gerbong + 1) + " tujuan " + kota[0][tujuan] + ": " + sisaKursi);
     }
 
-    // Fungsi pembayaran
+    //fungsi mendapatkan nama gerbong
+    // static String getGerbongName() {
+    //     String gerbongName;
+    //     if (gerbongKereta == 1) {
+    //         gerbongName = "Gerbong Ekonomi";
+    //     } else {
+    //         gerbongName = "Gerbong Eksekutif";
+    //     }
+    //     return gerbongName + " tujuan " + kota[0][kotaTujuan];
+    // }
+
+    //fungsi pembayaran
     static void pembayaran() {
         System.out.println("\n==========================================");
         System.out.println("|          --- Pembayaran ---            |");
@@ -298,7 +313,7 @@ public class PemesananTiketKereta {
         }
     }
 
-    // Fungsi cetak struk pembelian tiket
+    //fungsi cetak struk pembelian tiket
     static void cetakStruk() {
         System.out.println("\n===========================================");
         System.out.println("|      --- Struk Pembelian Tiket ---      |");
@@ -338,7 +353,8 @@ public class PemesananTiketKereta {
           }
         }
       }
-      
+    
+    //fungsi laporan dana
     static void cetakLaporanDana(String[] tanggalPemesanan, int[] totalHargaPemesanan) {
     System.out.println("\n===========================================");
     System.out.println("|      --- Laporan Dana Bulanan ---      |");
@@ -353,7 +369,7 @@ public class PemesananTiketKereta {
     }
     }
 
-    // Fungsi ucapan terimakasih
+    //fungsi ucapan terimakasih
     static void ucapanTerimakasih() {
         System.out.println("Terimakasih sudah memakai layanan kami.\n" +
                 "Semoga perjalanan anda menyenangkan dan selamat sampai tujuan.");
