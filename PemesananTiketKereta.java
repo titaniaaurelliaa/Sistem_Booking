@@ -77,16 +77,19 @@ public class PemesananTiketKereta {
 
     //fungsi admin
     static void admin(){
+        boolean exit = false;
             do{
                 //menampilkan menu
                 System.out.println("\n\nMenu: ");
                 System.out.println("1. Pesan tiket kereta");
                 System.out.println("2. Cek stok ");
                 System.out.println("3. Laporan dana"); //admin
+                System.out.println("4. Keluar");
                 System.out.print("Masukkan pilihan anda: ");
                 int menuAwal = input.nextInt();
 
-                if (menuAwal == 1){
+                switch (menuAwal) {
+                    case 1 :
                     // memilih tujuan
                     memilihKotaTujuan();
 
@@ -116,32 +119,48 @@ public class PemesananTiketKereta {
                     } else {
                         ucapanTerimakasih();
                     }
-                } else if (menuAwal == 2){
-                    //cek stok
+                    break;
+
+                    case 2:
                     cekKetersediaanKursi(0, 0); //Ekonomi Surabaya
                     cekKetersediaanKursi(0, 1); //Eksekutif Surabaya
                     cekKetersediaanKursi(1, 0); //Ekonomi Jakarta
                     cekKetersediaanKursi(1, 1); //Eksekutif Jakarta
-                } else if (menuAwal == 3){
+                    break;
+
+                    case 3:
                     laporanDanaBulanan();
-                    //getDataPemesanan(tanggal, (int) totalharga);
-                   // cetakLaporanDana(tanggalPemesanan, totalHargaPemesanan);
+                    break;
+
+                    case 4:
+                    ucapanTerimakasih();
+                    exit = true;
+                    break;
+
+                    default:
+                    System.out.println("Pilihan tidak valid. Silakan pilih kembali.");
+                    break;
                 }
-            } while (true);
+                
+            } while (!exit);
     }
 
     //fungsi pengguna
     static void pengguna(){
+        boolean exit = false;
             do{
                 //menampilkan menu
                 System.out.println("\n\nMenu: ");
                 System.out.println("1. Pesan tiket kereta");
                 System.out.println("2. Cek stok kursi");
+                System.out.println("3. Keluar");
                 System.out.print("Masukkan pilihan anda: ");
                 int menuAwal = input.nextInt();
 
-                if (menuAwal == 1){
-                    // memilih tujuan
+                switch (menuAwal) {
+
+                    case 1:
+                        // memilih tujuan
                     memilihKotaTujuan();
 
                     // memilih gerbong
@@ -168,14 +187,28 @@ public class PemesananTiketKereta {
                     } else {
                         ucapanTerimakasih();
                     }
-                } else if (menuAwal == 2){
+                    break;
+
+                    case 2:
                     //cek stok
                     cekKetersediaanKursi(0, 0); //Ekonomi Surabaya
                     cekKetersediaanKursi(0, 1); //Eksekutif Surabaya
                     cekKetersediaanKursi(1, 0); //Ekonomi Jakarta
                     cekKetersediaanKursi(1, 1); //Eksekutif Jakarta
+                    break;
+
+                    case 3:
+                    ucapanTerimakasih();
+                    exit = true;
+                    break;
+
+                    default:
+                    System.out.println("Pilihan tidak valid. Silakan pilih kembali.");
+                    break;
                 }
-            } while (true);
+
+                
+            } while (!exit);
     }
 
     //fungsi memilih kota tujuan
@@ -341,10 +374,9 @@ public class PemesananTiketKereta {
     }
 
     static void tambahPendapatanBulanan(double totalPendapatan) {
-        // Mendapatkan bulan dari tanggal keberangkatan
         int bulan = Integer.parseInt(tanggal.substring(3, 5));
     
-        // Menambahkan total pendapatan ke bulan tersebut
+        // Menambahkan total pendapatan ke bulan 
         totalPendapatanBulanan[bulan - 1] += totalPendapatan;
     }
     
@@ -370,9 +402,9 @@ public class PemesananTiketKereta {
         System.out.println("|        --- Laporan Dana Bulanan ---      |");
         System.out.println("===========================================");
 
-        // Menampilkan total pendapatan bulanan
+        // total pendapatan bulanan
         getDataPemesanan(tanggal, gerbongKereta);
-        for (int i = 0; i < totalPendapatanBulanan.length; i++) { //disini
+        for (int i = 0; i < totalPendapatanBulanan.length; i++) { 
             if (totalPendapatanBulanan[i] > 0) {
                 System.out.printf("Bulan %d : %.2f\n", i + 1, totalPendapatanBulanan[i]);
             }
