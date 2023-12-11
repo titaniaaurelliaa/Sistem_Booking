@@ -23,6 +23,7 @@ public class PemesananTiketKereta {
     static int[][] nominalHarga; 
     static String[] tanggalPemesanan = new String[100];
     static int[] totalHargaPemesanan = new int[100];
+    static double[] totalPendapatanBulanan = new double[12];
 
     //fungsi main
      public static void main(String[] args) {
@@ -101,6 +102,8 @@ public class PemesananTiketKereta {
                     // pembayaran
                     pembayaran();
 
+                    getDataPemesanan(tanggal, (int) totalharga);
+
                     // menu
                     System.out.println("\nMenu:");
                     System.out.println("1. Tampilkan struk pembelian tiket");
@@ -120,8 +123,9 @@ public class PemesananTiketKereta {
                     cekKetersediaanKursi(1, 0); //Ekonomi Jakarta
                     cekKetersediaanKursi(1, 1); //Eksekutif Jakarta
                 } else if (menuAwal == 3){
-                    getDataPemesanan(tanggal, (int) totalharga);
-                    cetakLaporanDana(tanggalPemesanan, totalHargaPemesanan);
+                    laporanDanaBulanan();
+                    //getDataPemesanan(tanggal, (int) totalharga);
+                   // cetakLaporanDana(tanggalPemesanan, totalHargaPemesanan);
                 }
             } while (true);
     }
@@ -336,6 +340,14 @@ public class PemesananTiketKereta {
         }
     }
 
+    static void tambahPendapatanBulanan(double totalPendapatan) {
+        // Mendapatkan bulan dari tanggal keberangkatan
+        int bulan = Integer.parseInt(tanggal.substring(3, 5));
+    
+        // Menambahkan total pendapatan ke bulan tersebut
+        totalPendapatanBulanan[bulan - 1] += totalPendapatan;
+    }
+    
     //fungsi laporan bulanan
     static void getDataPemesanan(String tanggal, int totalharga) {
         for (int i = 0; i < penumpang.length; i++) {
@@ -343,24 +355,28 @@ public class PemesananTiketKereta {
             if (penumpang[i][j] != null) {
               tanggalPemesanan[i] = tanggal;
               totalHargaPemesanan[i] = totalharga;
+              
+              int bulan = Integer.parseInt(tanggal.substring(3, 5));
+              totalPendapatanBulanan[bulan - 1] += (int) totalharga;
+              //tambahPendapatanBulanan(totalharga);
             }
           }
         }
-      }
+    }
     
     //fungsi laporan dana
-    static void cetakLaporanDana(String[] tanggalPemesanan, int[] totalHargaPemesanan) {
-    System.out.println("\n===========================================");
-    System.out.println("|      --- Laporan Dana Bulanan ---      |");
-    System.out.println("===========================================");
-    
-    int totalPendapatan = 0;
-    for (int i = 0; i < tanggalPemesanan.length; i++) {
-        if (tanggalPemesanan[i] != null) {
-        System.out.println("Tanggal : " + tanggalPemesanan[i] + ", Total Pendapatan : " + totalHargaPemesanan[i]);
-        totalPendapatan += totalHargaPemesanan[i];
+    static void laporanDanaBulanan() {
+        System.out.println("\n===========================================");
+        System.out.println("|        --- Laporan Dana Bulanan ---      |");
+        System.out.println("===========================================");
+
+        // Menampilkan total pendapatan bulanan
+        getDataPemesanan(tanggal, gerbongKereta);
+        for (int i = 0; i < totalPendapatanBulanan.length; i++) { //disini
+            if (totalPendapatanBulanan[i] > 0) {
+                System.out.printf("Bulan %d : %.2f\n", i + 1, totalPendapatanBulanan[i]);
+            }
         }
-    }
     }
 
     //fungsi ucapan terimakasih
