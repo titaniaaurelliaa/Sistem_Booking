@@ -253,13 +253,19 @@ public class PemesananTiketKereta {
     //fungsi cek stok
     static void cekKetersediaanKursi(int tujuan, int gerbong) {
         int sisaKursi = 0;
-        for (int i = 0; i < penumpang.length; i++) {
-            for (int j = 0; j < penumpang[i].length; j++) {
-                if (penumpang[i][j] == null) {
-                    sisaKursi++;
-                }
+        for (int i = 0; i < penumpang[gerbong].length; i++) {
+            if (penumpang[gerbong][i] == null) {
+                sisaKursi++;
             }
         }
+
+        // for (int i = 0; i < penumpang.length; i++) {
+        //     for (int j = 0; j < penumpang[i].length; j++) {
+        //         if (penumpang[i][j] == null) {
+        //             sisaKursi++;
+        //         }
+        //     }
+        // }
         String kotaTujuanStr = kota[0][tujuan];
         String gerbongStr = (gerbong == 0) ? "Gerbong Ekonomi" : "Gerbong Eksekutif";
 
