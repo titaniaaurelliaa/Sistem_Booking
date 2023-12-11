@@ -348,9 +348,11 @@ public class PemesananTiketKereta {
     System.out.println("|      --- Laporan Dana Bulanan ---      |");
     System.out.println("===========================================");
     
+    int totalPendapatan = 0;
     for (int i = 0; i < tanggalPemesanan.length; i++) {
         if (tanggalPemesanan[i] != null) {
         System.out.println("Tanggal : " + tanggalPemesanan[i] + ", Total Pendapatan : " + totalHargaPemesanan[i]);
+        totalPendapatan += totalHargaPemesanan[i];
         }
     }
     }
