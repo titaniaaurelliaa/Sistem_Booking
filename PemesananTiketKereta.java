@@ -81,8 +81,7 @@ public class PemesananTiketKereta {
                 System.out.println("\n\nMenu: ");
                 System.out.println("1. Pesan tiket kereta");
                 System.out.println("2. Cek stok ");
-                System.out.println("3. Riwayat pemesanan");
-                System.out.println("4. Laporan dana"); //admin
+                System.out.println("3. Laporan dana"); //admin
                 System.out.print("Masukkan pilihan anda: ");
                 int menuAwal = input.nextInt();
 
@@ -102,9 +101,6 @@ public class PemesananTiketKereta {
                     // pembayaran
                     pembayaran();
 
-                    // cetak struk
-                    //cetakStruk();
-
                     // menu
                     System.out.println("\nMenu:");
                     System.out.println("1. Tampilkan struk pembelian tiket");
@@ -118,10 +114,12 @@ public class PemesananTiketKereta {
                         ucapanTerimakasih();
                     }
                 } else if (menuAwal == 2){
-                    cekKetersediaanKursi(kotaTujuan, gerbongKereta);
+                    //cek stok
+                    cekKetersediaanKursi(0, 0); //Ekonomi Surabaya
+                    cekKetersediaanKursi(0, 1); //Eksekutif Surabaya
+                    cekKetersediaanKursi(1, 0); //Ekonomi Jakarta
+                    cekKetersediaanKursi(1, 1); //Eksekutif Jakarta
                 } else if (menuAwal == 3){
-                    //cetakStruk();
-                } else if (menuAwal == 4) {
                     getDataPemesanan(tanggal, (int) totalharga);
                     cetakLaporanDana(tanggalPemesanan, totalHargaPemesanan);
                 }
@@ -154,9 +152,6 @@ public class PemesananTiketKereta {
                     // pembayaran
                     pembayaran();
 
-                    // cetak struk
-                    //cetakStruk();
-
                     // menu
                     System.out.println("\nMenu:");
                     System.out.println("1. Tampilkan struk pembelian tiket");
@@ -171,7 +166,10 @@ public class PemesananTiketKereta {
                     }
                 } else if (menuAwal == 2){
                     //cek stok
-                    cekKetersediaanKursi(kotaTujuan, gerbongKereta);
+                    cekKetersediaanKursi(0, 0); //Ekonomi Surabaya
+                    cekKetersediaanKursi(0, 1); //Eksekutif Surabaya
+                    cekKetersediaanKursi(1, 0); //Ekonomi Jakarta
+                    cekKetersediaanKursi(1, 1); //Eksekutif Jakarta
                 }
             } while (true);
     }
@@ -259,25 +257,14 @@ public class PemesananTiketKereta {
             for (int j = 0; j < penumpang[i].length; j++) {
                 if (penumpang[i][j] == null) {
                     sisaKursi++;
-                    System.out.println("Baris " + (i + 1) + ", Kolom " + (j + 1) + ": Kosong");
-                } else {
-                    System.out.println("Baris " + (i + 1) + ", Kolom " + (j + 1) + ": Terisi");
                 }
             }
         }
-        System.out.println("Jumlah sisa kursi di gerbong " + (gerbong + 1) + " tujuan " + kota[0][tujuan] + ": " + sisaKursi);
-    }
+        String kotaTujuanStr = kota[0][tujuan];
+        String gerbongStr = (gerbong == 0) ? "Gerbong Ekonomi" : "Gerbong Eksekutif";
 
-    //fungsi mendapatkan nama gerbong
-    // static String getGerbongName() {
-    //     String gerbongName;
-    //     if (gerbongKereta == 1) {
-    //         gerbongName = "Gerbong Ekonomi";
-    //     } else {
-    //         gerbongName = "Gerbong Eksekutif";
-    //     }
-    //     return gerbongName + " tujuan " + kota[0][kotaTujuan];
-    // }
+        System.out.println("Jumlah sisa kursi di gerbong " + (gerbong + 1) + " tujuan " + kotaTujuanStr + " (" + gerbongStr + "): " + sisaKursi);
+    }
 
     //fungsi pembayaran
     static void pembayaran() {
@@ -343,6 +330,7 @@ public class PemesananTiketKereta {
         }
     }
 
+    //fungsi laporan bulanan
     static void getDataPemesanan(String tanggal, int totalharga) {
         for (int i = 0; i < penumpang.length; i++) {
           for (int j = 0; j < penumpang[i].length; j++) {
