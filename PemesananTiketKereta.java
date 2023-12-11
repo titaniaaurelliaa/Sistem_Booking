@@ -68,7 +68,7 @@ public class PemesananTiketKereta {
             }
             if (login) {
                 System.out.println("Login berhasil");
-                admin();
+                //admin();
             } else {
                 System.out.println("\nUsername dan PIN Salah!");
             }
