@@ -402,12 +402,6 @@ public class PemesananTiketKereta {
         }
     }
 
-    static void tambahPendapatanBulanan(double totalPendapatan) {
-        int bulan = Integer.parseInt(tanggal.substring(3, 5));
-    
-        // Menambahkan total pendapatan ke bulan 
-        totalPendapatanBulanan[bulan - 1] += totalPendapatan;
-    }
     
     //fungsi laporan bulanan
     static void getDataPemesanan(String tanggal, int totalharga) {
