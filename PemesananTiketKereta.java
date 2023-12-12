@@ -11,6 +11,10 @@ public class PemesananTiketKereta {
     {"Surabaya", "Jakarta"},
     {"KA jayabaya", "KA Gajayana"}
     };
+    static int [][] kursiTersedia = {
+        {40,40},//surabaya
+        {40,40}//jakarta
+    };
     static int pilihan;
     static int kotaTujuan;
     static int gerbongKereta;
@@ -274,6 +278,7 @@ public class PemesananTiketKereta {
                 if (penumpang[baris - 1][kolom - 1] == null) {
                     penumpang[baris - 1][kolom - 1] = nama;
                     jml++;
+                    kursiTersedia[kotaTujuan][gerbongKereta - 1]--; // Update available seats
                     System.out.println("Data penumpang berhasil di input");
                 } else {
                     System.out.println("Kursi sudah terisi. Silakan pilih kursi lain.");
@@ -282,6 +287,18 @@ public class PemesananTiketKereta {
                 System.out.println("Kursi tidak valid. Silakan pilih kursi antara baris 1-10 dan kolom 1-4.");
             }
 
+            // if (baris >= 1 && baris <= 10 && kolom >= 1 && kolom <= 4) {
+            //     if (penumpang[baris - 1][kolom - 1] == null) {
+            //         penumpang[baris - 1][kolom - 1] = nama;
+            //         jml++;
+            //         System.out.println("Data penumpang berhasil di input");
+            //     } else {
+            //         System.out.println("Kursi sudah terisi. Silakan pilih kursi lain.");
+            //     }
+            // } else {
+            //     System.out.println("Kursi tidak valid. Silakan pilih kursi antara baris 1-10 dan kolom 1-4.");
+            // }
+
             System.out.print("Apakah anda ingin menambah pelanggan lain (Y/T)? ");
             jawab = input.next().charAt(0);
         } while (jawab == 'y' || jawab == 'Y');
@@ -289,12 +306,24 @@ public class PemesananTiketKereta {
 
     //fungsi cek stok
     static void cekKetersediaanKursi(int tujuan, int gerbong) {
-        int sisaKursi = 0;
-        for (int i = 0; i < penumpang[gerbong].length; i++) {
-            if (penumpang[gerbong][i] == null) {
-                sisaKursi++;
-            }
-        }
+        int sisaKursi = kursiTersedia[tujuan][gerbong];
+        String kotaTujuanStr = kota[0][tujuan];
+        String gerbongStr = (gerbong == 0) ? "Gerbong Ekonomi" : "Gerbong Eksekutif";
+        //int sisaKursi = penumpang[gerbong].length;
+
+        // for (int i = 0; i < penumpang.length; i++) {
+        //     for (int j = 0; j < penumpang[i].length; j++) {
+        //     if (i == tujuan && j < gerbong) {
+        //         sisaKursi--;
+        //     }
+        //     }
+        // }
+        // int sisaKursi = 0;
+        // for (int i = 0; i < penumpang[gerbong].length; i++) {
+        //     if (penumpang[gerbong][i] == null) {
+        //         sisaKursi++;
+        //     }
+        // }
 
         // for (int i = 0; i < penumpang.length; i++) {
         //     for (int j = 0; j < penumpang[i].length; j++) {
@@ -303,10 +332,10 @@ public class PemesananTiketKereta {
         //         }
         //     }
         // }
-        String kotaTujuanStr = kota[0][tujuan];
-        String gerbongStr = (gerbong == 0) ? "Gerbong Ekonomi" : "Gerbong Eksekutif";
+        // String kotaTujuanStr = kota[0][tujuan];
+        // String gerbongStr = (gerbong == 0) ? "Gerbong Ekonomi" : "Gerbong Eksekutif";
 
-        System.out.println("Jumlah sisa kursi di gerbong " + (gerbong + 1) + " tujuan " + kotaTujuanStr + " (" + gerbongStr + "): " + sisaKursi);
+        System.out.println("Jumlah sisa kursi di gerbong " + (gerbong) + " tujuan " + kotaTujuanStr + " (" + gerbongStr + "): " + sisaKursi);
     }
 
     //fungsi pembayaran
