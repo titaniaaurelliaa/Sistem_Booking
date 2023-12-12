@@ -426,7 +426,7 @@ public class PemesananTiketKereta {
         System.out.println("===========================================");
 
         // total pendapatan bulanan
-        getDataPemesanan(tanggal, gerbongKereta);
+        //getDataPemesanan(tanggal, gerbongKereta);
         for (int i = 0; i < totalPendapatanBulanan.length; i++) { 
             if (totalPendapatanBulanan[i] > 0) {
                 System.out.printf("Bulan %d : %.2f\n", i + 1, totalPendapatanBulanan[i]);
